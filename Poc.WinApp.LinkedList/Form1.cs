@@ -22,7 +22,33 @@ namespace Poc.WinApp.LinkedList
             buttonAddAfter.Click += ButtonBelow_Click;
             buttonAddLast.Click += ButtonAddLast_Click;
             buttonAddBefore.Click += ButtonAddAbove_Click;
+            buttonRemove.Click += ButtonRemove_Click;
+            buttonClear1.Click += ButtonClear1_Click;
+            buttonClear2.Click += ButtonClear2_Click;
 
+        }
+
+        private void ButtonClear2_Click(object? sender, EventArgs e)
+        {
+            textBoxFind.Text = "";
+        }
+
+        private void ButtonClear1_Click(object? sender, EventArgs e)
+        {
+            textBoxValue.Text = "";
+        }
+
+        private void ButtonRemove_Click(object? sender, EventArgs e)
+        {
+            if (textBoxFind.Text != string.Empty && MessageBox.Show($"Do you want to remove {textBoxFind.Text}?", "Remove", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                var foundData = FindValue(textBoxFind.Text);
+                if (foundData != null)
+                {
+                    productions.Remove(foundData);
+                }
+                DisplayMembers();
+            }
         }
 
         private void ButtonAddAbove_Click(object? sender, EventArgs e)
@@ -148,6 +174,14 @@ namespace Poc.WinApp.LinkedList
             }
 
             textBoxData.Text = data;
+
+            ClearAllTexts();
+        }
+
+        private void ClearAllTexts()
+        {
+            textBoxFind.Clear();
+            textBoxValue.Clear();
         }
     }
 }

@@ -46,6 +46,8 @@
             buttonMoveUp = new Button();
             buttonMoveDown = new Button();
             buttonRemove = new Button();
+            buttonClear2 = new Button();
+            buttonClear1 = new Button();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -236,11 +238,31 @@
             buttonRemove.Text = "Remove";
             buttonRemove.UseVisualStyleBackColor = true;
             // 
+            // buttonClear2
+            // 
+            buttonClear2.Location = new Point(919, 352);
+            buttonClear2.Name = "buttonClear2";
+            buttonClear2.Size = new Size(33, 23);
+            buttonClear2.TabIndex = 14;
+            buttonClear2.Text = "X";
+            buttonClear2.UseVisualStyleBackColor = true;
+            // 
+            // buttonClear1
+            // 
+            buttonClear1.Location = new Point(919, 114);
+            buttonClear1.Name = "buttonClear1";
+            buttonClear1.Size = new Size(33, 23);
+            buttonClear1.TabIndex = 15;
+            buttonClear1.Text = "X";
+            buttonClear1.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(959, 493);
+            ClientSize = new Size(1009, 493);
+            Controls.Add(buttonClear1);
+            Controls.Add(buttonClear2);
             Controls.Add(buttonRemove);
             Controls.Add(buttonMoveDown);
             Controls.Add(buttonMoveUp);
@@ -283,5 +305,7 @@
         private Button buttonMoveUp;
         private Button buttonMoveDown;
         private Button buttonRemove;
+        private Button buttonClear2;
+        private Button buttonClear1;
     }
 }
