@@ -28,14 +28,15 @@ namespace Poc.WinApp.LinkedList
 
         }
 
+        #region "ButtonClick"
         private void ButtonClear2_Click(object? sender, EventArgs e)
         {
-            textBoxFind.Text = "";
+            textBoxFind.Clear();
         }
 
         private void ButtonClear1_Click(object? sender, EventArgs e)
         {
-            textBoxValue.Text = "";
+            textBoxValue.Clear();
         }
 
         private void ButtonRemove_Click(object? sender, EventArgs e)
@@ -76,16 +77,69 @@ namespace Poc.WinApp.LinkedList
             }
         }
 
+        private void ButtonAddTop_Click(object? sender, EventArgs e)
+        {
+            AddtoTop();
+        }
+
+        #endregion
+
+        #region "Linked List"
+
         private void AddAfter(ProductionDataModel current, ProductionDataModel newNode)
         {
             productions.AddAfter(productions.Find(current), newNode);
             DisplayMembers();
         }
 
-        private void ButtonAddTop_Click(object? sender, EventArgs e)
+        private void AddtoTop()
         {
-            AddtoTop();
+            productions.AddFirst(AddList(textBoxValue.Text, selectedStatus));
+            DisplayMembers();
         }
+
+        private void AddtoBottom()
+        {
+            productions.AddLast(AddList(textBoxValue.Text, selectedStatus));
+            DisplayMembers();
+        }
+
+        private void AddBefore(ProductionDataModel current, ProductionDataModel newNode)
+        {
+            productions.AddBefore(productions.Find(current), newNode);
+            DisplayMembers();
+        }
+
+        private ProductionDataModel AddList(string orderNo, E_OrderStatuses status)
+        {
+            ProductionDataModel productionDataModel = new()
+            {
+                GUID = Guid.NewGuid(),
+                OrderNo = orderNo,
+                OrderStatus = status
+            };
+
+            return productionDataModel;
+        }
+
+        private ProductionDataModel FindValue(string orderNo)
+        {
+            ProductionDataModel foundData = null;
+
+            foreach (ProductionDataModel item in productions)
+            {
+                if (item.OrderNo == orderNo)
+                {
+                    foundData = item;
+                    break;
+                }
+            }
+
+            return foundData;
+        }
+
+        #endregion
+
 
         private void radioButton_CheckedChanged(object? sender, EventArgs e)
         {
@@ -118,51 +172,6 @@ namespace Poc.WinApp.LinkedList
             }
         }
 
-        private ProductionDataModel AddList(string orderNo, E_OrderStatuses status)
-        {
-            ProductionDataModel productionDataModel = new()
-            {
-                GUID = Guid.NewGuid(),
-                OrderNo = orderNo,
-                OrderStatus = status
-            };
-
-            return productionDataModel;
-        }
-
-        private void AddtoTop()
-        {
-            productions.AddFirst(AddList(textBoxValue.Text, selectedStatus));
-            DisplayMembers();
-        }
-
-        private void AddtoBottom()
-        {
-            productions.AddLast(AddList(textBoxValue.Text, selectedStatus));
-            DisplayMembers();
-        }
-
-        private void AddBefore(ProductionDataModel current, ProductionDataModel newNode)
-        {
-            productions.AddBefore(productions.Find(current), newNode);
-            DisplayMembers();
-        }
-
-        private ProductionDataModel FindValue(string orderNo)
-        {
-            ProductionDataModel foundData = null;
-
-            foreach (ProductionDataModel item in productions)
-            {
-                if (item.OrderNo == orderNo)
-                {
-                    foundData = item;
-                    break;
-                }
-            }
-
-            return foundData;
-        }
 
         private void DisplayMembers()
         {
