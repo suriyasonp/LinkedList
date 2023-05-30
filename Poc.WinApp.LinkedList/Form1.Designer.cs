@@ -31,8 +31,8 @@
             textBoxValue = new TextBox();
             buttonAddTop = new Button();
             buttonAddLast = new Button();
-            buttonAddAbove = new Button();
-            buttonBelow = new Button();
+            buttonAddBefore = new Button();
+            buttonAddAfter = new Button();
             textBoxData = new TextBox();
             textBoxFind = new TextBox();
             label1 = new Label();
@@ -77,25 +77,25 @@
             buttonAddLast.Text = "Add to Last";
             buttonAddLast.UseVisualStyleBackColor = true;
             // 
-            // buttonAddAbove
+            // buttonAddBefore
             // 
-            buttonAddAbove.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
-            buttonAddAbove.Location = new Point(757, 381);
-            buttonAddAbove.Name = "buttonAddAbove";
-            buttonAddAbove.Size = new Size(75, 23);
-            buttonAddAbove.TabIndex = 3;
-            buttonAddAbove.Text = "Add above";
-            buttonAddAbove.UseVisualStyleBackColor = true;
+            buttonAddBefore.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonAddBefore.Location = new Point(757, 381);
+            buttonAddBefore.Name = "buttonAddBefore";
+            buttonAddBefore.Size = new Size(75, 23);
+            buttonAddBefore.TabIndex = 3;
+            buttonAddBefore.Text = "Add before";
+            buttonAddBefore.UseVisualStyleBackColor = true;
             // 
-            // buttonBelow
+            // buttonAddAfter
             // 
-            buttonBelow.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
-            buttonBelow.Location = new Point(838, 381);
-            buttonBelow.Name = "buttonBelow";
-            buttonBelow.Size = new Size(75, 23);
-            buttonBelow.TabIndex = 4;
-            buttonBelow.Text = "Add below";
-            buttonBelow.UseVisualStyleBackColor = true;
+            buttonAddAfter.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonAddAfter.Location = new Point(838, 381);
+            buttonAddAfter.Name = "buttonAddAfter";
+            buttonAddAfter.Size = new Size(75, 23);
+            buttonAddAfter.TabIndex = 4;
+            buttonAddAfter.Text = "Add after";
+            buttonAddAfter.UseVisualStyleBackColor = true;
             // 
             // textBoxData
             // 
@@ -250,8 +250,8 @@
             Controls.Add(label1);
             Controls.Add(textBoxFind);
             Controls.Add(textBoxData);
-            Controls.Add(buttonBelow);
-            Controls.Add(buttonAddAbove);
+            Controls.Add(buttonAddAfter);
+            Controls.Add(buttonAddBefore);
             Controls.Add(buttonAddLast);
             Controls.Add(buttonAddTop);
             Controls.Add(textBoxValue);
@@ -268,8 +268,8 @@
         private TextBox textBoxValue;
         private Button buttonAddTop;
         private Button buttonAddLast;
-        private Button buttonAddAbove;
-        private Button buttonBelow;
+        private Button buttonAddBefore;
+        private Button buttonAddAfter;
         private TextBox textBoxData;
         private TextBox textBoxFind;
         private Label label1;

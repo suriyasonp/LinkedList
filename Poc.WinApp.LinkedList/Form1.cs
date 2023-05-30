@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 
 namespace Poc.WinApp.LinkedList
 {
@@ -18,8 +19,20 @@ namespace Poc.WinApp.LinkedList
             this.radioButton4.CheckedChanged += new EventHandler(radioButton_CheckedChanged);
 
             buttonAddTop.Click += ButtonAddTop_Click;
-            buttonBelow.Click += ButtonBelow_Click;
+            buttonAddAfter.Click += ButtonBelow_Click;
             buttonAddLast.Click += ButtonAddLast_Click;
+            buttonAddBefore.Click += ButtonAddAbove_Click;
+
+        }
+
+        private void ButtonAddAbove_Click(object? sender, EventArgs e)
+        {
+            var founddata = FindValue(textBoxFind.Text);
+
+            if (founddata != null)
+            {
+                AddBefore(founddata, AddList(textBoxValue.Text, selectedStatus));
+            }
         }
 
         private void ButtonAddLast_Click(object? sender, EventArgs e)
@@ -29,7 +42,18 @@ namespace Poc.WinApp.LinkedList
 
         private void ButtonBelow_Click(object? sender, EventArgs e)
         {
+            var founddata = FindValue(textBoxFind.Text);
 
+            if (founddata != null)
+            {
+                AddAfter(founddata, AddList(textBoxValue.Text, selectedStatus));
+            }
+        }
+
+        private void AddAfter(ProductionDataModel current, ProductionDataModel newNode)
+        {
+            productions.AddAfter(productions.Find(current), newNode);
+            DisplayMembers();
         }
 
         private void ButtonAddTop_Click(object? sender, EventArgs e)
@@ -92,7 +116,13 @@ namespace Poc.WinApp.LinkedList
             DisplayMembers();
         }
 
-        private void AddAbove(string orderNo)
+        private void AddBefore(ProductionDataModel current, ProductionDataModel newNode)
+        {
+            productions.AddBefore(productions.Find(current), newNode);
+            DisplayMembers();
+        }
+
+        private ProductionDataModel FindValue(string orderNo)
         {
             ProductionDataModel foundData = null;
 
@@ -105,12 +135,7 @@ namespace Poc.WinApp.LinkedList
                 }
             }
 
-            if (foundData != null)
-            {
-                var current = productions.Find(foundData);
-
-            }
-
+            return foundData;
         }
 
         private void DisplayMembers()
