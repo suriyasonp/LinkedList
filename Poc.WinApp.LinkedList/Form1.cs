@@ -28,13 +28,21 @@ namespace Poc.WinApp.LinkedList
             buttonClear1.Click += ButtonClear1_Click;
             buttonClear2.Click += ButtonClear2_Click;
             buttonMoveUp.Click += ButtonMoveUp_Click;
+            buttonMoveDown.Click += ButtonMoveDown_Click;
         }
+
+       
 
         #region "ButtonClick"
 
         private void ButtonMoveUp_Click(object? sender, EventArgs e)
         {
             MoveUp();
+        }
+
+        private void ButtonMoveDown_Click(object? sender, EventArgs e)
+        {
+            MoveDown();
         }
 
         private void ButtonClear2_Click(object? sender, EventArgs e)
@@ -126,6 +134,18 @@ namespace Poc.WinApp.LinkedList
                 var previous = productions.Find(current).Previous;
                 productions.Remove(current);
                 productions.AddBefore(previous, CreateNode(current));
+                DisplayMembers();
+            }
+        }
+
+        private void MoveDown()
+        {
+            var current = FindValue(textBoxFind.Text);
+            if (current != null)
+            {
+                var next = productions.Find(current).Next;
+                productions.Remove(current);
+                productions.AddAfter(next, CreateNode(current));
                 DisplayMembers();
             }
         }
