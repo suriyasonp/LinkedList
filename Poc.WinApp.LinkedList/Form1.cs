@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Diagnostics.PerformanceData;
 using System.Net.Http.Headers;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Poc.WinApp.LinkedList
 {
@@ -25,10 +27,16 @@ namespace Poc.WinApp.LinkedList
             buttonRemove.Click += ButtonRemove_Click;
             buttonClear1.Click += ButtonClear1_Click;
             buttonClear2.Click += ButtonClear2_Click;
-
+            buttonMoveUp.Click += ButtonMoveUp_Click;
         }
 
         #region "ButtonClick"
+
+        private void ButtonMoveUp_Click(object? sender, EventArgs e)
+        {
+            MoveUp();
+        }
+
         private void ButtonClear2_Click(object? sender, EventArgs e)
         {
             textBoxFind.Clear();
@@ -64,7 +72,7 @@ namespace Poc.WinApp.LinkedList
 
         private void ButtonAddLast_Click(object? sender, EventArgs e)
         {
-            AddtoBottom();
+            AddtoBottom(textBoxValue.Text, selectedStatus);
         }
 
         private void ButtonBelow_Click(object? sender, EventArgs e)
@@ -79,7 +87,7 @@ namespace Poc.WinApp.LinkedList
 
         private void ButtonAddTop_Click(object? sender, EventArgs e)
         {
-            AddtoTop();
+            AddtoTop(textBoxValue.Text, selectedStatus);
         }
 
         #endregion
@@ -92,15 +100,15 @@ namespace Poc.WinApp.LinkedList
             DisplayMembers();
         }
 
-        private void AddtoTop()
+        private void AddtoTop(string value, E_OrderStatuses status)
         {
-            productions.AddFirst(AddList(textBoxValue.Text, selectedStatus));
+            productions.AddFirst(AddList(value, status));
             DisplayMembers();
         }
 
-        private void AddtoBottom()
+        private void AddtoBottom(string value, E_OrderStatuses status)
         {
-            productions.AddLast(AddList(textBoxValue.Text, selectedStatus));
+            productions.AddLast(AddList(value, status));
             DisplayMembers();
         }
 
@@ -108,6 +116,18 @@ namespace Poc.WinApp.LinkedList
         {
             productions.AddBefore(productions.Find(current), newNode);
             DisplayMembers();
+        }
+
+        private void MoveUp()
+        {
+            var current = FindValue(textBoxFind.Text);
+            if (current != null)
+            {
+                var previous = productions.Find(current).Previous;
+                productions.Remove(current);
+                productions.AddBefore(previous, CreateNode(current));
+                DisplayMembers();
+            }
         }
 
         private ProductionDataModel AddList(string orderNo, E_OrderStatuses status)
@@ -120,6 +140,12 @@ namespace Poc.WinApp.LinkedList
             };
 
             return productionDataModel;
+        }
+
+        private LinkedListNode<ProductionDataModel> CreateNode(ProductionDataModel dataModel)
+        {
+            LinkedListNode<ProductionDataModel> node = new(dataModel);
+            return node;
         }
 
         private ProductionDataModel FindValue(string orderNo)
